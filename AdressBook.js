@@ -134,14 +134,23 @@ class Contact{
 let addressBook = new Array();
 
 function addContact(...params) {
-    try{
-    let newContact = new Contact(params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7]);
-    addressBook.push(newContact);
-    }catch(e){
-        console.error(e);
+    firstname = params[0];
+    lastname = params[1]; 
+    let countOfPersons = addressBook.filter(x=>x.firstName == firstname && x.lastName == lastname).reduce((totalPeople,e)=>totalPeople+1,0);
+    if (countOfPersons==0){
+        try{
+        let newContact = new Contact(params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7]);
+        addressBook.push(newContact);
+        }catch(e){
+            console.error(e);
+        }
+    }
+    else{
+        console.log("The Contact with name already exists");
     }
     
 }
+
 function editContact(...params){
     firstname = params[0];
     lastname = params[1]; 
@@ -154,19 +163,28 @@ function editContact(...params){
     }
     addressBook[index] = newContact;
 }
+
 function deleteContact(...params){
     firstname = params[0];
     lastname = params[1]; 
     let index = addressBook.findIndex(x=>x.firstName == firstname && x.lastName == lastname);
-    // delete addressBook[index];
     addressBook.splice(index,1);
 }
+
 function getNoOfContacts(array){
     let count = array.reduce((totalCount,e)=>totalCount+1,0);
     return count;
 }
 
-addContact("Vikash","pathak","Old Subedhar","Nagpur","Maharashtra",440024,9561272972,"Vikashpathak01@gmail.com");
+function searchContactInCity(city,name,array){
+    let contacts = array.filter(e=>e.city == city && e.firstName+" "+e.lastName==name).reduce((totalCount,e)=>totalCount+1,0);
+    if(contacts==0)
+    return false;
+    else
+    return true;
+}
+
+addContact("vikashpathak","pathak","Old Subedhar","Nagpur","Maharashtra",440024,9561272972,"vikashpathakpathak01@gmail.com");
 addContact("Rohit","pathak","New Subedhar","Nagpur","Maharashtra",440026,7777979699,"rohitpathak@outlook.com");
 addContact("Deepika","Ganorkar","Shinde Nagar","Amravati","Maharashtra",440021,9874563210,"deepg@gmail.com");
 addContact("Sagar","Mode","Central City","Gondia","MP",440023,7894561230,"sagarm@yahoo.com");
@@ -185,3 +203,11 @@ addContact("Deepika","Ganorkar","Shinde Nagar","Amravati","Maharashtra",440021,9
 
 noOfContacts = getNoOfContacts(addressBook);
 console.log("Total no of contacts : "+noOfContacts);
+
+let City = "Nagpur";
+let name = "vikashpathak";
+let isPersonPresent = searchContactInCity(City,name,addressBook);
+if(isPersonPresent==true)
+console.log("The person "+name+" is found in the city "+City);
+else
+console.log("The person "+name+" is not found in the city "+City);
