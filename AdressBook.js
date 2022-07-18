@@ -187,9 +187,13 @@ function viewContactsByCity(city,array){
     let contacts = array.filter(e=>e.city == city).map(e=>e.firstName+" "+e.lastName);
     return contacts;
 }
+function getContactsCountByCity(city,array){
+    let count = array.filter(e=>e.city == city).reduce((totalCount,e)=>totalCount+1,0);
+    return count;
+}
 
 
-addContact("vikash","pathak","Old Subedhar","Nagpur","Maharashtra",440024,9561272972,"vikashpathak01@gmail.com");
+addContact("Vikash","pathak","Old Subedhar","Nagpur","Maharashtra",440024,9561272972,"Vikashpathak01@gmail.com");
 addContact("Rohit","pathak","New Subedhar","Nagpur","Maharashtra",440026,7777979699,"rohitpathak@outlook.com");
 addContact("Deepika","Ganorkar","Shinde Nagar","Amravati","Maharashtra",440021,9874563210,"deepg@gmail.com");
 addContact("Sagar","Mode","Central City","Gondia","MP",440023,7894561230,"sagarm@yahoo.com");
@@ -210,7 +214,7 @@ noOfContacts = getNoOfContacts(addressBook);
 console.log("Total no of contacts : "+noOfContacts);
 
 let City = "Nagpur";
-let name = "vikash";
+let name = "Vikash";
 let isPersonPresent = searchContactInCity(City,name,addressBook);
 if(isPersonPresent==true)
 console.log("The person "+name+" is found in the city "+City);
@@ -223,3 +227,7 @@ if(contacts.length>0)
 console.log("The people in the city "+City+" are :"+contacts);
 else
 console.log("No people found in the city");
+
+City = "Nagpur";
+let contactsCount = getContactsCountByCity(City,addressBook);
+console.log("The no of people in the city "+City+" is : "+contactsCount);
