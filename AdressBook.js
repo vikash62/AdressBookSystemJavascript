@@ -161,6 +161,10 @@ function deleteContact(...params){
     // delete addressBook[index];
     addressBook.splice(index,1);
 }
+function getNoOfContacts(array){
+    let count = array.reduce((totalCount,e)=>totalCount+1,0);
+    return count;
+}
 
 addContact("Vikash","pathak","Old Subedhar","Nagpur","Maharashtra",440024,9561272972,"Vikashpathak01@gmail.com");
 addContact("Rohit","pathak","New Subedhar","Nagpur","Maharashtra",440026,7777979699,"rohitpathak@outlook.com");
@@ -175,3 +179,6 @@ console.log(addressBook.length);
 deleteContact("Shub","Pande");
 console.log(addressBook.toString());
 console.log(addressBook.length);
+
+let noOfContacts = getNoOfContacts(addressBook);
+console.log("Total no of contacts : "+noOfContacts);
