@@ -196,6 +196,10 @@ function sortContactsByName(array){
     array.sort((a,b)=> (a.firstName>b.firstName) ? 1 : ((a.firstName<b.firstName)? -1 : 0));
     return array;
 }
+function sortContactsByCity(array){
+    array.sort((a,b)=> (a.city>b.city) ? 1 : ((a.city<b.city)? -1 : 0));
+    return array;
+}
 
 //Adding contacts and validating with regex
 addContact("Vikash","pathak","Old Subedhar","Nagpur","Maharashtra",440024,9561272972,"Vikashpathak01@gmail.com");
@@ -246,4 +250,10 @@ console.log("The no of people in the city "+City+" is : "+contactsCount);
 
 //Sorting contacts by name
 addressBook = sortContactsByName(addressBook);
+console.log(addressBook.toString());
+
+addContact("Shub","Pande","North Zone","Chandrapur","Maharashtra",440025,1234567890,"shubp@gmail.com");
+
+//Sorting contacts by city
+addressBook = sortContactsByCity(addressBook);
 console.log(addressBook.toString());
