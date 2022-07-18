@@ -142,10 +142,36 @@ function addContact(...params) {
     }
     
 }
+function editContact(...params){
+    firstname = params[0];
+    lastname = params[1]; 
+    let index = addressBook.findIndex(x=>x.firstName == firstname && x.lastName == lastname);
+    let newContact;
+    try{
+    newContact = new Contact(params[0],params[1],params[2],params[3],params[4],params[5],params[6],params[7]);
+    }catch(e){
+        console.error(e);
+    }
+    addressBook[index] = newContact;
+}
+function deleteContact(...params){
+    firstname = params[0];
+    lastname = params[1]; 
+    let index = addressBook.findIndex(x=>x.firstName == firstname && x.lastName == lastname);
+    // delete addressBook[index];
+    addressBook.splice(index,1);
+}
 
-addContact("Vikash","pathak","Old Subedhar","Nagpur","Maharashtra",440024,3369784512,"Vikashpathak01@gmail.com");
+addContact("Vikash","pathak","Old Subedhar","Nagpur","Maharashtra",440024,9561272972,"Vikashpathak01@gmail.com");
 addContact("Rohit","pathak","New Subedhar","Nagpur","Maharashtra",440026,7777979699,"rohitpathak@outlook.com");
 addContact("Deepika","Ganorkar","Shinde Nagar","Amravati","Maharashtra",440021,9874563210,"deepg@gmail.com");
 addContact("Sagar","Mode","Central City","Gondia","MP",440023,7894561230,"sagarm@yahoo.com");
 addContact("Shub","Pande","North Zone","Chandrapur","Maharashtra",440025,1234567890,"shubp@gmail.com");
+editContact("Shub","Pande","North Zone","Chandrapur","Maharashtra",440024,1234567890,"shubp@gmail.com");
 console.log(addressBook.toString())
+
+console.log(addressBook.length);
+
+deleteContact("Shub","Pande");
+console.log(addressBook.toString());
+console.log(addressBook.length);
